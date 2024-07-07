@@ -13,7 +13,7 @@ export class SearchForm extends Component<{
     return (
       <form
         onSubmit={this.props.handleSubmit}
-        className="w-96 flex flex-row justify-center bg-gray-950 py-2 px-4"
+        className="w-full flex flex-row justify-center duration-150 bg-gray-950 py-2 px-4"
       >
         <input
           placeholder={this.props.value}

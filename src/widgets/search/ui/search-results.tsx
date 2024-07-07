@@ -1,6 +1,7 @@
 import { Component } from 'react';
-import { iPerson } from '../../shared/interfaces/start-wars.interface';
-import { Loader } from '../../shared/ui/icons/loader';
+import { iPerson } from '../../../shared/interfaces/start-wars.interface';
+import { Loader } from '../../../shared/ui/icons/loader';
+import { SearchItem } from './search-item';
 
 export class SearchResults extends Component<{
   loader: boolean;
@@ -13,12 +14,13 @@ export class SearchResults extends Component<{
     return (
       <section
         className={
-          (!this.props.loader ? 'opacity-100' : 'opacity-0') + ' duration-150 '
+          (!this.props.loader ? 'opacity-100' : 'opacity-0') +
+          ' no-scrollbar flex flex-col gap-2 duration-150 w-full h-screen overflow-y-scroll'
         }
       >
         {this.props.peoples
           ? this.props.peoples.map((peoples, index) => (
-              <div key={index}>{peoples.name}</div>
+              <SearchItem data={peoples} key={index} />
             ))
           : null}
       </section>

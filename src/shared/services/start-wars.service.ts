@@ -6,9 +6,7 @@ export class StartWarsService {
     setLoader: (loader: boolean) => void
   ): Promise<iWarsResponse> {
     setLoader(true);
-    return fetch(
-      'https://swapi.dev/api/starships/?search=' + name.toLowerCase()
-    )
+    return fetch('https://swapi.dev/api/people/?search=' + name.toLowerCase())
       .then(response => response.json())
       .then(data => {
         return data as iWarsResponse;

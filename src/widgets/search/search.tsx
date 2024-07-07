@@ -1,11 +1,12 @@
 import { Component } from 'react';
-import ErrorBoundary from '../shared/error-boundary';
-import { iPerson } from '../shared/interfaces/start-wars.interface';
-import { LocalStorageService } from '../shared/services/local-storage.service.';
-import { StartWarsService } from '../shared/services/start-wars.service';
-import Search from '../widgets/search/search';
+import ErrorBoundary from '../../shared/error-boundary';
+import { iPerson } from '../../shared/interfaces/start-wars.interface';
+import { LocalStorageService } from '../../shared/services/local-storage.service.';
+import { StartWarsService } from '../../shared/services/start-wars.service';
+import { SearchForm } from './ui/search-bar';
+import { SearchResults } from './ui/search-results';
 
-class App extends Component<
+class Search extends Component<
   Record<string, never>,
   { value: string; peoples: iPerson[]; loader: boolean; error: boolean }
 > {
@@ -50,13 +51,29 @@ class App extends Component<
 
   render() {
     return (
-      <main className="bg-slate-900 text-white flex flex-col items-center h-screen overflow-hidden">
+      <section className="md:w-96 w-64 flex flex-col gap-2">
         <ErrorBoundary>
-          <Search />
+          <SearchForm
+            value={this.state.value}
+            handleInput={this.handleInputChange}
+            handleSubmit={this.handleSubmit}
+          />
+          <button
+            onClick={() => {
+              this.setState({ error: true });
+            }}
+          >
+            catch error
+          </button>
+          <SearchResults
+            loader={this.state.loader}
+            peoples={this.state.peoples}
+            error={this.state.error}
+          />
         </ErrorBoundary>
-      </main>
+      </section>
     );
   }
 }
 
-export default App;
+export default Search;
