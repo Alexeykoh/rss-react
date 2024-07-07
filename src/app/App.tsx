@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import ErrorBoundary from '../shared/error-boundary';
 import { iPerson } from '../shared/interfaces/start-wars.interface';
 import { LocalStorageService } from '../shared/services/local-storage.service.';
 import { StartWarsService } from '../shared/services/start-wars.service';
@@ -51,9 +50,7 @@ class App extends Component<
   render() {
     return (
       <main className="bg-slate-900 text-white flex flex-col items-center h-screen overflow-hidden">
-        <ErrorBoundary>
-          <Search />
-        </ErrorBoundary>
+        <Search />
       </main>
     );
   }
