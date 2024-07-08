@@ -5,7 +5,8 @@
   "type": "module",
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint:fix && npm run format:fix"
+      "pre-commit": "npm run lint:fix && npm run format:fix",
+      "pre-push": "npm run test"
     }
   },
   "scripts": {
