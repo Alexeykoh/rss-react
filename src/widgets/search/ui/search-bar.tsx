@@ -16,7 +16,10 @@ const SearchForm = ({
 }: SearchFormProps) => {
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={e => {
+        e.preventDefault();
+        handleSubmit();
+      }}
       className="w-full flex flex-row justify-center duration-150 bg-gray-950 py-2 px-4 gap-2"
     >
       <button
