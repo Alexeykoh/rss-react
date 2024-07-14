@@ -1,29 +1,36 @@
-import { Component } from 'react';
+import { FC } from 'react';
 import { iPerson } from '../../../shared/interfaces/start-wars.interface';
-import { Loader } from '../../../shared/ui/icons/loader';
-import { SearchItem } from './search-item';
+import Loader from '../../../shared/ui/icons/loader';
+import SearchItem from './search-item';
 
-export class SearchResults extends Component<{
+interface SearchResultsProps {
   loader: boolean;
-  peoples: iPerson[];
+  data: iPerson[];
   error: boolean;
-}> {
-  public render() {
-    if (this.props.error) throw new Error('Error');
-    if (this.props.loader) return <Loader />;
-    return (
-      <section
-        className={
-          (!this.props.loader ? 'opacity-100' : 'opacity-0') +
-          ' no-scrollbar flex flex-col gap-2 duration-150 w-full h-screen overflow-y-scroll'
-        }
-      >
-        {this.props.peoples
-          ? this.props.peoples.map((peoples, index) => (
-              <SearchItem data={peoples} key={index} />
-            ))
-          : null}
-      </section>
-    );
-  }
 }
+
+const SearchResults: FC<SearchResultsProps> = ({
+  loader,
+  data: peoples,
+  error
+}) => {
+  if (error) throw new Error('Error');
+  if (loader) return <Loader />;
+
+  return (
+    <section
+      className={
+        (!loader ? 'opacity-100' : 'opacity-0') +
+        ' no-scrollbar flex flex-col gap-2 duration-150 w-full h-screen overflow-y-scroll'
+      }
+    >
+      {peoples
+        ? peoples.map((peoples, index) => (
+            <SearchItem data={peoples} key={index} />
+          ))
+        : null}
+    </section>
+  );
+};
+
+export default SearchResults;

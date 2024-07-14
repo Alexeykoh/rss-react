@@ -1,22 +1,28 @@
-import { Component } from 'react';
+import React from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { iPerson } from '../../../shared/interfaces/start-wars.interface';
 
-export class SearchItem extends Component<{
+interface Props {
   data: iPerson;
-}> {
-  public render() {
-    const keys = Object.keys(this.props.data) as Array<keyof iPerson>;
-    return (
-      <li className="flex flex-col p-2 gap-2 bg-slate-600">
-        {keys.slice(0, 4).map(key => (
-          <div className=" gap-2 break-words" key={key}>
-            <p className="text-lg font-bold">{key}</p>
-            <p className="text-balance">
-              {this.props.data[key] as keyof iPerson}
-            </p>
-          </div>
-        ))}
-      </li>
-    );
-  }
 }
+
+const SearchItem: React.FC<Props> = ({ data }) => {
+  const dataID = data.url.split('/')[5];
+  const [searchParams] = useSearchParams();
+
+  return (
+    <Link to={`/details/?details=${dataID}`} className="cursor-pointer">
+      <li
+        className={
+          (Number(dataID) === Number(searchParams.get('details'))
+            ? ' bg-sky-500 '
+            : ' bg-slate-600 ') + ' flex flex-col p-2 gap-2 '
+        }
+      >
+        <p className="text-balance">{data.name}</p>
+      </li>
+    </Link>
+  );
+};
+
+export default SearchItem;
