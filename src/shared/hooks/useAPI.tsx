@@ -17,7 +17,12 @@ export function useAPI<T>(apiPromise: () => Promise<T>) {
     apiPromise()
       .then(data => {
         setState(prev => {
-          return { ...prev, result: data, loading: false, error: false };
+          return {
+            ...prev,
+            result: data,
+            loading: false,
+            error: false
+          };
         });
       })
       .catch(() => {
