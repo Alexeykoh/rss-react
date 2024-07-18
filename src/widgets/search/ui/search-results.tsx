@@ -4,23 +4,15 @@ import Loader from '../../../shared/ui/icons/loader';
 import SearchItem from './search-item';
 
 interface SearchResultsProps {
-  loader: boolean;
   data: iPerson[];
-  error: boolean;
 }
 
-const SearchResults: FC<SearchResultsProps> = ({
-  loader,
-  data: peoples,
-  error
-}) => {
-  if (error) throw new Error('Error');
-  if (loader) return <Loader />;
+const SearchResults: FC<SearchResultsProps> = ({ data: peoples }) => {
+  <Loader />;
 
   return (
     <section
       className={
-        (!loader ? 'opacity-100' : 'opacity-0') +
         ' no-scrollbar flex flex-col gap-2 duration-150 w-full h-screen overflow-y-scroll'
       }
     >

@@ -1,3 +1,10 @@
+import { Counter } from '../../features/counter/counter';
+
 export default function MainPage() {
-  return <div>main page</div>;
+  return (
+    <div>
+      <p>main page</p>
+      <Counter />
+    </div>
+  );
 }
