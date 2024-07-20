@@ -1,38 +1,26 @@
-import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import { iPerson } from '../../shared/interfaces/start-wars.interface';
-import { StartWarsService } from '../../shared/services/start-wars.service';
-import Loader from '../../shared/ui/icons/loader';
+import { useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Character } from '../../features/character/character';
+import { CharacterItem } from '../../features/character/ui/character-item';
+import { useGetCharacterByIDMutation } from '../../shared/services/star-wars.service';
+import { CloseBtn } from '../../shared/ui/buttons/close-btn';
 
 export default function DetailsPage() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [data, setData] = useState<null | iPerson>(null);
-  const [loader, setLoader] = useState(false);
+  const [getCharacter, { data, isLoading, error }] =
+    useGetCharacterByIDMutation();
+
   useEffect(() => {
-    const details = searchParams.get('details');
-    setLoader(true);
-    StartWarsService.getPerson(Number(details)).then(data => {
-      setLoader(false);
-      if (data) {
-        setData(data);
-      }
-    });
+    getCharacter(Number(searchParams.get('details')) || 1);
   }, [searchParams]);
 
-  if (loader) return <Loader />;
-
-  if (data) {
-    const dataArray = Object.entries(data);
-    return (
-      <div className="w-full flex flex-col">
-        <Link to="/">close</Link>
-        {dataArray.map(([name, value], index) => (
-          <div key={index} className="flex flex-row gap-4 ">
-            <p className="font-bold break-words">{name}</p>
-            <p className="break-words">{value}</p>
-          </div>
-        ))}
-      </div>
-    );
-  }
+  return (
+    <section>
+      <CloseBtn onClick={() => navigate('/')} />
+      <Character isLoading={isLoading} isError={error ? 'error' : ''}>
+        <CharacterItem data={data} />;
+      </Character>
+    </section>
+  );
 }

@@ -5,15 +5,19 @@ import { iPerson, iWarsResponse } from '../interfaces/start-wars.interface';
 // Define a service using a base URL and expected endpoints
 export const startWarsAPI = createApi({
   reducerPath: 'startWarsAPI',
+  tagTypes: ['startWarsAPI'],
   baseQuery: fetchBaseQuery({ baseUrl: 'https://swapi.dev/api/' }),
   endpoints: builder => ({
     getCharactersByPage: builder.query<iWarsResponse, number>({
       query: page => `people?page=${page}`
     }),
-    getCharacterByID: builder.query<iPerson, number>({
+    searchCharacters: builder.query<iWarsResponse, string>({
+      query: searchText => `people?search=${searchText}`
+    }),
+    getCharacterByID: builder.mutation<iPerson, number>({
       query: id => `people/${id}`
     }),
-    searchCharacters: builder.query<iWarsResponse, string>({
+    search: builder.mutation<iWarsResponse, string>({
       query: searchText => `people?search=${searchText}`
     })
   })
@@ -23,6 +27,7 @@ export const startWarsAPI = createApi({
 // auto-generated based on the defined endpoints
 export const {
   useGetCharactersByPageQuery,
-  useGetCharacterByIDQuery,
-  useSearchCharactersQuery
+  useSearchCharactersQuery,
+  useSearchMutation,
+  useGetCharacterByIDMutation
 } = startWarsAPI;

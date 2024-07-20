@@ -1,100 +1,69 @@
-import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useSearch } from '../../shared/hooks/useSearch';
-import { iPerson } from '../../shared/interfaces/start-wars.interface';
-import { useGetCharactersByPageQuery } from '../../shared/services/star-wars.service';
-import { StartWarsService } from '../../shared/services/start-wars.service';
-import Loader from '../../shared/ui/icons/loader';
+
+import { useEffect } from 'react';
+import {
+  useGetCharactersByPageQuery,
+  useSearchMutation
+} from '../../shared/services/star-wars.service';
+import { LoaderWrapper } from '../../shared/ui/loader-wrapper/loader-wrapper';
 import SearchForm from './ui/search-bar';
-import SearchResults from './ui/search-results';
+import SearchList from './ui/search-list';
+import { SearchNav } from './ui/search-nav';
 
 export function Search() {
   const [searchParams] = useSearchParams();
-  const { data, error, isLoading, isFetching } = useGetCharactersByPageQuery(
+  const [
+    doSearch,
+    { isLoading: searchIsFetching, error: searchError, data: searchData }
+  ] = useSearchMutation();
+  const { searchValue, setSearchValue } = useSearch();
+  const { data, error, isFetching, refetch } = useGetCharactersByPageQuery(
     Number(searchParams.get('page')) || 1
   );
-  const { searchValue, setSearchValue } = useSearch();
-  const [state, setState] = useState({
-    value: '',
-    error: false,
-    peoples: [] as iPerson[],
-    loader: false,
-    page: 1
-  });
-
-  useEffect(() => {
-    setState(prev => {
-      return { ...prev, value: searchValue };
-    });
-  }, []);
-
-  function setLoader(loader: boolean) {
-    setState(prev => {
-      return { ...prev, loader: loader };
-    });
-  }
 
   function handleSubmit() {
-    setLoader(true);
-    setSearchValue(state.value);
-    StartWarsService.search(searchValue)
-      .then(data => {
-        setLoader(false);
-        setState(prev => {
-          return { ...prev, peoples: data.results };
-        });
-      })
-      .finally(() => {
-        setLoader(false);
-      });
+    doSearch(searchValue);
   }
   function clearInput() {
     setSearchValue('');
-    setState(prev => {
-      return { ...prev, value: '' };
-    });
+    refetch();
   }
-  function handleInput(value: string) {
-    setState(prev => {
-      return { ...prev, value: value };
-    });
-  }
+
+  useEffect(() => {
+    doSearch(searchValue);
+    return () => {
+      doSearch('');
+    };
+  }, [searchValue]);
 
   return (
     <section className="md:w-96 w-64 h-full flex flex-col gap-2">
       <SearchForm
-        value={state.value}
-        handleInput={handleInput}
+        value={searchValue}
+        handleInput={setSearchValue}
         handleSubmit={handleSubmit}
         clearInput={clearInput}
       />
-      <button
-        onClick={() => {
-          setState(prev => {
-            return { ...prev, error: true };
-          });
-        }}
-      >
-        catch error
-      </button>
-      <div className="w-full flex justify-between">
-        <Link
-          to={`/?page=${Number(searchParams.get('page')) - 1}`}
-          className="px-4 py-2 cursor-pointer"
+      <SearchNav
+        isLoading={isFetching}
+        nextPage={Number(searchParams.get('page')) + 1}
+        prevPage={Number(searchParams.get('page')) - 1}
+      />
+      {searchValue && (
+        <LoaderWrapper
+          error={searchError ? true : false}
+          isLoading={searchIsFetching}
         >
-          prev
-        </Link>
-        <Link
-          to={`/?page=${Number(searchParams.get('page')) + 1}`}
-          className="px-4 py-2 cursor-pointer"
-        >
-          next
-        </Link>
-      </div>
-      <p>page: {Number(searchParams.get('page'))}</p>
-      {isFetching && !isLoading ? <Loader /> : null}
-      {data && <SearchResults data={data.results || []} />}
-      {error && <p>error</p>}
+          <SearchList data={searchData?.results || []} />
+        </LoaderWrapper>
+      )}
+      {!searchValue && (
+        <LoaderWrapper error={error ? true : false} isLoading={isFetching}>
+          <p>page: {Number(searchParams.get('page'))}</p>
+          <SearchList data={data?.results || []} />
+        </LoaderWrapper>
+      )}
     </section>
   );
 }
