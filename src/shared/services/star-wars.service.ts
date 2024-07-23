@@ -20,7 +20,6 @@ export const startWarsAPI = createApi({
   })
 });
 
-
 export const {
   useGetCharactersByPageQuery,
   useGetCharacterByIDQuery,
