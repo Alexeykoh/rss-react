@@ -13,7 +13,7 @@ const SearchResults: FC<SearchResultsProps> = ({ data: peoples }) => {
   return (
     <section
       className={
-        ' no-scrollbar flex flex-col gap-2 duration-150 w-full h-screen overflow-y-scroll'
+        ' flex flex-col gap-2 duration-150 w-full p-2 h-full overflow-y-scroll'
       }
     >
       {peoples

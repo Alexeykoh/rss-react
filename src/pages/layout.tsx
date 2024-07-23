@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Outlet } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
+import { ThemeContext } from '../shared/providers/theme/theme.context';
 import { Search } from '../widgets/search/search';
 
 export function Layout() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { theme } = useContext(ThemeContext);
   useEffect(() => {
     const page = searchParams.get('page');
 
@@ -14,9 +16,16 @@ export function Layout() {
   }, []);
 
   return (
-    <main className="bg-slate-900 text-white flex flex-row items-center h-screen overflow-hidden">
-      <Search />
-      <section className="w-1/3 bg-slate-900 h-full">
+    <main
+      className={
+        (theme === 'dark' ? ' bg-gray-600 ' : ' bg-gray-100 ') +
+        ' text-white flex flex-row h-screen overflow-hidden'
+      }
+    >
+      <section className="flex w-1/3">
+        <Search />
+      </section>
+      <section className="w-2/3 h-full">
         <Outlet />
       </section>
     </main>

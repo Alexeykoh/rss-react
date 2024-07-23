@@ -8,7 +8,7 @@ export interface IThemeContext {
 
 export const ThemeContext = createContext<IThemeContext>({
   theme: 'light',
-  setTheme: () => {
-    return;
+  setTheme: (value: themeType) => {
+    return value;
   }
 });
