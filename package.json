@@ -17,7 +17,7 @@
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "format:fix": "prettier --write .",
     "prepare": "husky install",
-    "test": "vitest || exit 0",
+    "test": "vitest run --coverage.enabled --coverage.100",
     "coverage": "vitest run --coverage"
   },
   "jest": {
