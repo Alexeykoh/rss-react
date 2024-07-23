@@ -8,8 +8,8 @@ import {
 } from '../../shared/services/star-wars.service';
 import { LoaderWrapper } from '../../shared/ui/loader-wrapper/loader-wrapper';
 import SearchForm from './ui/search-bar';
-import SearchList from './ui/search-list';
 import { SearchNav } from './ui/search-nav';
+import SearchList from './ui/search-list';
 
 export function Search() {
   const [searchParams] = useSearchParams();
