@@ -7,22 +7,25 @@ import {
   useSearchMutation
 } from '../../shared/services/star-wars.service';
 import { LoaderWrapper } from '../../shared/ui/loader-wrapper/loader-wrapper';
+
 import SearchForm from './ui/search-bar';
-import { SearchNav } from './ui/search-nav';
 import SearchList from './ui/search-list';
+import { SearchNav } from './ui/search-nav';
 
 export function Search() {
   const [searchParams] = useSearchParams();
+  const { searchValue, setSearchValue } = useSearch();
   const [
     doSearch,
     { isLoading: searchIsFetching, error: searchError, data: searchData }
   ] = useSearchMutation();
-  const { searchValue, setSearchValue } = useSearch();
+
   const { data, error, isFetching, refetch } = useGetCharactersByPageQuery(
     Number(searchParams.get('page')) || 1
   );
 
   function handleSubmit() {
+    doSearch(searchValue);
     doSearch(searchValue);
   }
   function clearInput() {
