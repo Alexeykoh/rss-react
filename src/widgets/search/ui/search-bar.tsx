@@ -58,7 +58,7 @@ const SearchForm = ({ value, handleInput, handleSubmit }: SearchFormProps) => {
               : ' bg-gray-50 focus:ring-blue-500 focus:border-blue-500 text-gray-900 border border-gray-300') +
             'block w-full p-4 ps-10 text-sm  rounded-lg  '
           }
-          placeholder="Search Mockups, Logos..."
+          placeholder="Search Luke Skywalker, R2-D2 ..."
           required
         />
         <button

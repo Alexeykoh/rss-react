@@ -7,7 +7,7 @@ export function ThemeSwitcher() {
   const { theme, setTheme } = useContext(ThemeContext);
 
   return (
-    <div className="flex">
+    <div className="flex p-2 bg-gray-400 rounded-full">
       <input
         className="hidden"
         type="checkbox"

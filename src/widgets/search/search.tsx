@@ -46,13 +46,13 @@ export function Search() {
   return (
     <section className="w-full h-full flex flex-col gap-2  ">
       <div className="flex flex-row items-center gap-2 p-2">
+        <ThemeSwitcher />
         <SearchForm
           value={searchValue}
           handleInput={setSearchValue}
           handleSubmit={handleSubmit}
           clearInput={clearInput}
         />
-        <ThemeSwitcher />
       </div>
 
       <PaginationBar

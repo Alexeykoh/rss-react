@@ -16,7 +16,7 @@ export default function DetailsPage() {
   }, [searchParams]);
 
   return (
-    <section>
+    <section className="flex flex-col">
       <CloseBtn onClick={() => navigate('/')} />
       <Character isLoading={isLoading} isError={error ? 'error' : ''}>
         <CharacterItem data={data} />;
