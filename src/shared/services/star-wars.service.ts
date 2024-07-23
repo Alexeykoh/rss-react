@@ -3,6 +3,7 @@ import { iPerson, iWarsResponse } from '../interfaces/start-wars.interface';
 
 export const startWarsAPI = createApi({
   reducerPath: 'startWarsAPI',
+  tagTypes: ['startWarsAPI'],
   baseQuery: fetchBaseQuery({ baseUrl: 'https://swapi.dev/api/' }),
   tagTypes: ['Characters'],
   endpoints: builder => ({
@@ -22,6 +23,7 @@ export const startWarsAPI = createApi({
 
 export const {
   useGetCharactersByPageQuery,
-  useGetCharacterByIDQuery,
-  useSearchCharactersQuery
+  useSearchCharactersQuery,
+  useSearchMutation,
+  useGetCharacterByIDMutation
 } = startWarsAPI;

@@ -22,4 +22,5 @@ export interface iPerson {
   created: string;
   edited: string;
   url: string;
+  selected?: boolean;
 }
