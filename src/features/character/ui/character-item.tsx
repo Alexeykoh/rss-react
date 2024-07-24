@@ -11,11 +11,11 @@ export function CharacterItem({ data }: iCharacterItemProps) {
   const icon =
     'https://starwars-visualguide.com/assets/img/characters/' + dataID + '.jpg';
   return (
-    <div className="p-4 w-full flex flex-col items-center">
+    <div className="character-item p-4 w-full flex flex-col items-center">
       <div className="mb-4 text-center opacity-90">
         <a href="#" className="relative block">
           <img
-            alt="profil"
+            alt="profile"
             src={icon}
             className="mx-auto object-cover rounded-full h-40 w-40 "
           />
@@ -44,7 +44,8 @@ export function CharacterItem({ data }: iCharacterItemProps) {
             'max-w-xs py-4 font-light text-md flex flex-col items-center'
           }
         >
-          <li>Height: {data.height}</li> <li>Mass: {data.mass}</li>
+          <li>Height: {data.height}</li>
+          <li>Mass: {data.mass}</li>
           <li>Hair Color: {data.hair_color}</li>
           <li>Skin Color: {data.skin_color}</li>
           <li>Eye Color: {data.eye_color}</li>

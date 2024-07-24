@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { iPerson } from '../../../shared/interfaces/start-wars.interface';
-import Loader from '../../../shared/ui/icons/loader';
 import SearchItem from './search-item';
 
 interface SearchResultsProps {
@@ -8,8 +7,6 @@ interface SearchResultsProps {
 }
 
 const SearchResults: FC<SearchResultsProps> = ({ data: peoples }) => {
-  <Loader />;
-
   return (
     <section
       className={

@@ -13,12 +13,12 @@ export function CloseIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={
-        (theme === 'light' ? 'text-gray-800' : 'text-white') + ' w-12 h-12'
+        (theme === 'light' ? 'text-gray-800' : 'text-white') +
+        ' w-8 h-8 hover:scale-105 duration-150'
       }
     >
-      <circle cx="12" cy="12" r="10" />
-      <path d="m15 9-6 6" />
-      <path d="m9 9 6 6" />
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
     </svg>
   );
 }

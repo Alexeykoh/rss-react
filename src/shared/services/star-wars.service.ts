@@ -10,7 +10,7 @@ export const startWarsAPI = createApi({
       query: page => `people?page=${page}`
     }),
 
-    getCharacterByID: builder.mutation<iPerson, number>({
+    getCharacterByID: builder.query<iPerson, number>({
       query: id => `people/${id}`
     }),
 
@@ -26,6 +26,6 @@ export const startWarsAPI = createApi({
 export const {
   useGetCharactersByPageQuery,
   useSearchCharactersQuery,
-  useGetCharacterByIDMutation,
+  useGetCharacterByIDQuery,
   useSearchMutation
 } = startWarsAPI;

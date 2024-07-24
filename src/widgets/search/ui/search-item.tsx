@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useSearchParams } from 'react-router-dom';
 import { RootState } from '../../../app/app.store';
 import { iPerson } from '../../../shared/interfaces/start-wars.interface';
 import { ThemeContext } from '../../../shared/providers/theme/theme.context';
+import { ImagePreloader } from '../../../shared/ui/image-preloader/image-preloader';
 
 interface Props {
   data: iPerson;
@@ -14,9 +15,6 @@ const SearchItem: React.FC<Props> = ({ data }) => {
   const [searchParams] = useSearchParams();
   const viewedList = useSelector((state: RootState) => state.viewed.list);
   const dispatch = useDispatch();
-  const [check, setCheck] = useState<boolean>(
-    viewedList.filter(item => item.name === data.name).length > 0
-  );
   const dataID = data.url.split('/')[5];
   const icon =
     'https://starwars-visualguide.com/assets/img/characters/' + dataID + '.jpg';
@@ -24,21 +22,26 @@ const SearchItem: React.FC<Props> = ({ data }) => {
   function changeHandler(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.checked) {
       dispatch({ type: 'viewed/addItem', payload: data });
-      setCheck(true);
     } else {
       dispatch({ type: 'viewed/removeItem', payload: data });
-      setCheck(false);
     }
+  }
+
+  function checkHandler() {
+    if (viewedList.find(item => item.name === data.name)) {
+      return true;
+    }
+    return false;
   }
 
   return (
     <li
       className={
+        (theme === 'light' ? ' bg-white ' : ' bg-gray-500 ') +
         (Number(dataID) === Number(searchParams.get('details'))
-          ? ' bg-sky-500 '
-          : theme === 'light'
-            ? ' bg-white '
-            : ' bg-gray-500 ') + ' flex flex-row gap-2 rounded-md'
+          ? ' border-sky-400 '
+          : 'border-transparent') +
+        ' flex flex-row gap-2 rounded-md border-solid border-2 hover:translate-x-2 duration-150 '
       }
     >
       <div className="flex items-center flex-1 p-4 cursor-pointer select-none">
@@ -47,10 +50,10 @@ const SearchItem: React.FC<Props> = ({ data }) => {
           to={`/details/?page=${searchParams.get('page') || '1'}&details=${dataID}`}
         >
           <div className="flex flex-col items-center justify-center w-10 h-10 mr-4">
-            <img
-              alt={data.name + '_alt'}
+            <ImagePreloader
               src={icon}
-              className="mx-auto object-cover rounded-full h-10 w-10 "
+              alt={data.name + '_alt'}
+              classList={'mx-auto object-cover rounded-full h-10 w-10 '}
             />
           </div>
           <div className="flex-1 pl-1 mr-16">
@@ -77,7 +80,7 @@ const SearchItem: React.FC<Props> = ({ data }) => {
             onChange={changeHandler}
             type="checkbox"
             name={data.name}
-            checked={check}
+            checked={checkHandler()}
           />
         </label>
       </div>

@@ -1,4 +1,4 @@
-import Loader from '../../shared/ui/icons/loader';
+import { CharacterItemSkeleton } from './ui/skeleton-character-item';
 
 interface iCharacterProps {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ interface iCharacterProps {
 }
 export function Character({ children, isLoading, isError }: iCharacterProps) {
   if (isLoading) {
-    return <Loader />;
+    return <CharacterItemSkeleton />;
   }
   if (isError) {
     return <p>{isError}</p>;

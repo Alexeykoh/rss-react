@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 import { Outlet } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
 import { ThemeContext } from '../shared/providers/theme/theme.context';
+import { Flyout } from '../widgets/flyout/flyout';
 import { Search } from '../widgets/search/search';
 
 export function Layout() {
@@ -28,6 +29,7 @@ export function Layout() {
       <section className="w-2/3 h-full">
         <Outlet />
       </section>
+      <Flyout />
     </main>
   );
 }

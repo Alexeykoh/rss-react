@@ -19,7 +19,7 @@ export function PaginationBar({
   const { theme } = useContext(ThemeContext);
 
   return (
-    <div className="w-full flex justify-between">
+    <div className="w-full flex items-center justify-center gap-4 p-2">
       <PaginationButton
         action={onPrev}
         isDisabled={searchParams.get('page') === '1'}
