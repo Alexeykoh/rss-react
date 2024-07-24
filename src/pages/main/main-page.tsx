@@ -8,7 +8,10 @@ export default function MainPage() {
   const recentlyList = useSelector((state: RootState) => state.viewed.recently);
   const { theme } = useContext(ThemeContext);
   return (
-    <section className="flex flex-col gap-8 items-center justify-center w-full h-full">
+    <section
+      data-testid="main-page"
+      className="flex flex-col gap-8 items-center justify-center w-full h-full"
+    >
       <div className="">
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -1,11 +1,12 @@
 import { useContext } from 'react';
-import { ThemeContext } from '../../providers/theme/theme.context';
+import { ThemeContext } from '../../../providers/theme/theme.context';
 
 const Loader = () => {
   const { theme } = useContext(ThemeContext);
   return (
     <div className="flex items-center justify-center w-full h-full">
       <svg
+        data-testid="loader-spin-icon"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"

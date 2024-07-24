@@ -1,12 +1,15 @@
 import { useContext } from 'react';
 import { ThemeContext } from '../../../shared/providers/theme/theme.context';
-import Loader from '../../../shared/ui/icons/loader';
+import Loader from '../../../shared/ui/icons/loader/loader';
 
 export function CharacterItemSkeleton() {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <div className="p-4 w-full flex flex-col items-center animate-pulse">
+    <div
+      data-testid="character-item-skeleton"
+      className="p-4 w-full flex flex-col items-center animate-pulse"
+    >
       <div className="mb-4 text-center opacity-90">
         <span className="flex rounded-full h-40 w-40 bg-gray-400 ">
           <Loader />
@@ -14,6 +17,7 @@ export function CharacterItemSkeleton() {
       </div>
       <div className="text-center">
         <p
+          data-testid="character-item-skeleton-name"
           className={
             (theme === 'light' ? ' text-gray-800 ' : ' text-white ') +
             ' text-2xl'
@@ -24,6 +28,7 @@ export function CharacterItemSkeleton() {
           </span>
         </p>
         <p
+          data-testid="character-item-skeleton-gender"
           className={
             (theme === 'light' ? ' text-gray-800 ' : ' text-gray-200 ') +
             'text-xl font-light'

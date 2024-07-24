@@ -20,6 +20,7 @@ export function Flyout() {
 
   return (
     <div
+      data-testid="flyout"
       className={
         (theme === 'light'
           ? ' bg-sky-200 text-black '
@@ -48,6 +49,7 @@ export function Flyout() {
         </svg>
       </button>
       <button
+        data-testid="export-btn"
         className="clear-all-btn relative"
         onClick={() => {
           exportData(viewedList);
@@ -71,6 +73,7 @@ export function Flyout() {
           <path d="m9 15 3 3 3-3" />
         </svg>
         <span
+          data-testid="viewed-count"
           className={
             (theme === 'light'
               ? ' bg-sky-300 text-black '

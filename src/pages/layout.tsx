@@ -18,6 +18,7 @@ export function Layout() {
 
   return (
     <main
+      data-testid="layout"
       className={
         (theme === 'dark' ? ' bg-gray-600 ' : ' bg-gray-100 ') +
         ' text-white flex flex-row h-screen overflow-hidden'

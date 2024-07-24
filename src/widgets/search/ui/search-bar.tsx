@@ -12,6 +12,7 @@ const SearchForm = ({ value, handleInput, handleSubmit }: SearchFormProps) => {
   const { theme } = useContext(ThemeContext);
   return (
     <form
+      data-testid="search-form"
       onSubmit={e => {
         e.preventDefault();
         handleSubmit();
@@ -27,6 +28,7 @@ const SearchForm = ({ value, handleInput, handleSubmit }: SearchFormProps) => {
       <div className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <svg
+            data-testid="search-icon"
             className={
               (theme === 'dark' ? 'text-gray-400' : 'text-gray-500') +
               ' w-4 h-4 '
@@ -46,6 +48,7 @@ const SearchForm = ({ value, handleInput, handleSubmit }: SearchFormProps) => {
           </svg>
         </div>
         <input
+          data-testid="search-input"
           onInput={e => {
             handleInput((e.target as HTMLInputElement).value);
           }}
@@ -62,6 +65,7 @@ const SearchForm = ({ value, handleInput, handleSubmit }: SearchFormProps) => {
           required
         />
         <button
+          data-testid="search-submit-button"
           onClick={e => {
             e.preventDefault();
             handleSubmit();

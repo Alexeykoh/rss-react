@@ -1,10 +1,14 @@
-import { CloseIcon } from '../icons/close';
+import { CloseIcon } from '../icons/close/close';
 interface iCloseBtnProps {
   onClick: () => void;
 }
 export function CloseBtn({ onClick }: iCloseBtnProps) {
   return (
-    <button onClick={onClick} className="cursor-pointer py-2 px-4 self-end">
+    <button
+      data-testid="close-icon-btn"
+      onClick={onClick}
+      className="cursor-pointer py-2 px-4 self-end"
+    >
       <CloseIcon />
     </button>
   );

@@ -15,6 +15,15 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: 'src/setupTests',
-    mockReset: true
+    mockReset: true,
+    exclude: [
+      'node_modules',
+      'dist',
+      '.vite',
+      'vite.config.ts',
+      'postcss.config.js',
+      'tailwind.config.js',
+      'src/main.tsx'
+    ]
   }
 });

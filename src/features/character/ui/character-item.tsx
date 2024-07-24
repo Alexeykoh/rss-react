@@ -11,10 +11,14 @@ export function CharacterItem({ data }: iCharacterItemProps) {
   const icon =
     'https://starwars-visualguide.com/assets/img/characters/' + dataID + '.jpg';
   return (
-    <div className="character-item p-4 w-full flex flex-col items-center">
+    <div
+      data-testid="character-item"
+      className="character-item p-4 w-full flex flex-col items-center"
+    >
       <div className="mb-4 text-center opacity-90">
         <a href="#" className="relative block">
           <img
+            data-testid="character-item-icon"
             alt="profile"
             src={icon}
             className="mx-auto object-cover rounded-full h-40 w-40 "
@@ -23,6 +27,7 @@ export function CharacterItem({ data }: iCharacterItemProps) {
       </div>
       <div className="text-center">
         <p
+          data-testid="character-item-name"
           className={
             (theme === 'light' ? ' text-gray-800 ' : ' text-white ') +
             ' text-2xl'
@@ -31,6 +36,7 @@ export function CharacterItem({ data }: iCharacterItemProps) {
           {data.name}
         </p>
         <p
+          data-testid="character-item-gender"
           className={
             (theme === 'light' ? ' text-gray-800 ' : ' text-gray-200 ') +
             'text-xl font-light'
@@ -39,16 +45,21 @@ export function CharacterItem({ data }: iCharacterItemProps) {
           {data.gender}
         </p>
         <ul
+          data-testid="character-item-details"
           className={
             (theme === 'light' ? ' text-gray-800 ' : ' text-gray-400 ') +
             'max-w-xs py-4 font-light text-md flex flex-col items-center'
           }
         >
-          <li>Height: {data.height}</li>
-          <li>Mass: {data.mass}</li>
-          <li>Hair Color: {data.hair_color}</li>
-          <li>Skin Color: {data.skin_color}</li>
-          <li>Eye Color: {data.eye_color}</li>
+          <li data-testid="character-item-height">Height: {data.height}</li>
+          <li data-testid="character-item-mass">Mass: {data.mass}</li>
+          <li data-testid="character-item-hair">
+            Hair Color: {data.hair_color}
+          </li>
+          <li data-testid="character-item-skin">
+            Skin Color: {data.skin_color}
+          </li>
+          <li data-testid="character-item-eye">Eye Color: {data.eye_color}</li>
         </ul>
       </div>
     </div>

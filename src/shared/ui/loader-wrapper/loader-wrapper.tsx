@@ -12,7 +12,7 @@ export function LoaderWrapper({ children, error, isLoading }: iLoaderWrapper) {
       .map((el, index) => <SkeletonSearchItem key={el + index} />);
   }
   if (error) {
-    return <p>Something went wrong</p>;
+    return <p data-testid="error-message">Something went wrong</p>;
   }
 
   return children;

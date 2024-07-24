@@ -36,6 +36,7 @@ const SearchItem: React.FC<Props> = ({ data }) => {
 
   return (
     <li
+      data-testid="search-item"
       className={
         (theme === 'light' ? ' bg-white ' : ' bg-gray-500 ') +
         (Number(dataID) === Number(searchParams.get('details'))
@@ -46,6 +47,7 @@ const SearchItem: React.FC<Props> = ({ data }) => {
     >
       <div className="flex items-center flex-1 p-4 cursor-pointer select-none">
         <Link
+          data-testid="search-item-link"
           className="flex items-center flex-1 "
           to={`/details/?page=${searchParams.get('page') || '1'}&details=${dataID}`}
         >
@@ -58,6 +60,7 @@ const SearchItem: React.FC<Props> = ({ data }) => {
           </div>
           <div className="flex-1 pl-1 mr-16">
             <div
+              data-testid="search-item-name"
               className={
                 (theme === 'light' ? ' text-gray-600 ' : ' text-white') +
                 ' font-medium'
@@ -66,6 +69,7 @@ const SearchItem: React.FC<Props> = ({ data }) => {
               {data.name}
             </div>
             <div
+              data-testid="search-item-gender"
               className={
                 (theme === 'light' ? ' text-gray-600 ' : ' text-white') +
                 ' text-sm'
@@ -75,8 +79,9 @@ const SearchItem: React.FC<Props> = ({ data }) => {
             </div>
           </div>
         </Link>
-        <label htmlFor={data.name}>
+        <label data-testid="search-item-checkbox" htmlFor={data.name}>
           <input
+            data-testid="search-item-checkbox-input"
             onChange={changeHandler}
             type="checkbox"
             name={data.name}

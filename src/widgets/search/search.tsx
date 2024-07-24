@@ -44,7 +44,7 @@ export function Search() {
   }, [searchValue]);
 
   return (
-    <section className="w-full h-full flex flex-col gap-2">
+    <section data-testid="search" className="w-full h-full flex flex-col gap-2">
       <div className="flex flex-row items-center gap-2 p-2">
         <ThemeSwitcher />
         <SearchForm

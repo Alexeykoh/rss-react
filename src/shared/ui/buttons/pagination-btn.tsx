@@ -16,9 +16,14 @@ export function PaginationButton({
 }: iPaginationBar) {
   const { theme } = useContext(ThemeContext);
   return (
-    <button disabled={isDisabled} onClick={action}>
+    <button
+      data-testid={`pagination-${type}-btn`}
+      disabled={isDisabled}
+      onClick={action}
+    >
       {type === 'prev' ? (
         <svg
+          data-testid="pagination-btn-prev-icon"
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -39,6 +44,7 @@ export function PaginationButton({
         </svg>
       ) : (
         <svg
+          data-testid="pagination-btn-next-icon"
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"

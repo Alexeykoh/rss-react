@@ -20,7 +20,7 @@ export default function DetailsPage() {
   }, [data]);
 
   return (
-    <section className="flex flex-col">
+    <section data-testid="details-page" className="flex flex-col">
       <CloseBtn onClick={() => navigate('/')} />
       <Character
         isLoading={isLoading || isFetching}

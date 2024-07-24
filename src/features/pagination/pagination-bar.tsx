@@ -19,14 +19,20 @@ export function PaginationBar({
   const { theme } = useContext(ThemeContext);
 
   return (
-    <div className="w-full flex items-center justify-center gap-4 p-2">
+    <div
+      data-testid="pagination-bar"
+      className="w-full flex items-center justify-center gap-4 p-2"
+    >
       <PaginationButton
         action={onPrev}
         isDisabled={searchParams.get('page') === '1'}
         isLoading={isLoading}
         type={'prev'}
       />
-      <p className={theme === 'light' ? ' text-black ' : ' text-white '}>
+      <p
+        data-testid="pagination-bar-current-page"
+        className={theme === 'light' ? ' text-black ' : ' text-white '}
+      >
         {currentPage}
       </p>
       <PaginationButton
