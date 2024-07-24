@@ -25,7 +25,7 @@ export function Flyout() {
           ? ' bg-sky-200 text-black '
           : ' bg-sky-700 text-white ') +
         (isActive ? ' translate-y-0 ' : ' translate-y-32 ') +
-        ' fixed bottom-5 left-5 flex px-6 py-3 rounded-md flex-row gap-4 duration-150'
+        ' fixed bottom-5 right-5 flex px-6 py-3 rounded-md flex-row gap-4 duration-150'
       }
     >
       <button onClick={clearAllHandler}>

@@ -81,6 +81,7 @@ const SearchItem: React.FC<Props> = ({ data }) => {
             type="checkbox"
             name={data.name}
             checked={checkHandler()}
+            className="w-5 h-5"
           />
         </label>
       </div>

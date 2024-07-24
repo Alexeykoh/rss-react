@@ -4,10 +4,12 @@ import { iPerson } from '../../shared/interfaces/start-wars.interface';
 
 export interface viewedState {
   list: iPerson[];
+  recently: iPerson[];
 }
 
 const initialState: viewedState = {
-  list: []
+  list: [],
+  recently: []
 };
 
 export const viewedSlice = createSlice({
@@ -42,12 +44,20 @@ export const viewedSlice = createSlice({
 
     removeItem: (state, action: PayloadAction<iPerson>) => {
       state.list = state.list.filter(item => item.name !== action.payload.name);
+    },
+    addToRecently: (state, action: PayloadAction<iPerson>) => {
+      if (state.recently.find(item => item.name === action.payload.name))
+        return;
+      if (state.recently.length === 5) {
+        state.recently.shift();
+      }
+      state.recently.push(action.payload);
     }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { addItem, selectAll, clearList, removeItem } =
+export const { addItem, selectAll, clearList, removeItem, addToRecently } =
   viewedSlice.actions;
 
 export default viewedSlice.reducer;
