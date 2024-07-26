@@ -15,8 +15,20 @@ export function ImagePreloader({ src, alt, classList }: iImagePreloader) {
   }, [src]);
 
   if (!imageLoaded) {
-    return <span className={classList + ' animate-pulse bg-gray-200'}></span>;
+    return (
+      <span
+        data-testid="image-preloader-loading"
+        className={classList + ' animate-pulse bg-gray-200'}
+      ></span>
+    );
   }
 
-  return <img src={src} alt={alt} className={classList} />;
+  return (
+    <img
+      data-testid="image-preloader-img"
+      src={src}
+      alt={alt}
+      className={classList}
+    />
+  );
 }

@@ -34,10 +34,6 @@ export const viewedSlice = createSlice({
       });
     },
 
-    clearList: (state, action: PayloadAction<iPerson[]>) => {
-      state.list = state.list.filter(item => !action.payload.includes(item));
-    },
-
     clearAll: state => {
       state.list = [];
     },
@@ -57,7 +53,7 @@ export const viewedSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addItem, selectAll, clearList, removeItem, addToRecently } =
+export const { addItem, selectAll, removeItem, addToRecently, clearAll } =
   viewedSlice.actions;
 
 export default viewedSlice.reducer;

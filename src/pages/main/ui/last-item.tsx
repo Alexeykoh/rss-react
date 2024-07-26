@@ -16,6 +16,7 @@ export function LastItem({ data }: iLastItem) {
     'https://starwars-visualguide.com/assets/img/characters/' + dataID + '.jpg';
   return (
     <Link
+      data-testid="last-item"
       to={`/details/?page=${searchParams.get('page') || '1'}&details=${dataID}`}
       className={
         (theme === 'light' ? ' text-gray-600 ' : ' text-white ') +

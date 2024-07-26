@@ -9,6 +9,7 @@ interface SearchResultsProps {
 const SearchResults: FC<SearchResultsProps> = ({ data: peoples }) => {
   return (
     <section
+      data-testid="search-results"
       className={
         ' flex flex-col gap-2 duration-150 w-full p-2 h-full overflow-y-scroll'
       }

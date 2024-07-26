@@ -6,6 +6,7 @@ const SkeletonSearchItem: React.FC = () => {
 
   return (
     <li
+      data-testid="skeleton-search-item"
       className={
         (theme === 'light' ? ' bg-gray-50 ' : ' bg-gray-200') +
         ' flex flex-row gap-2 rounded-md animate-pulse'
