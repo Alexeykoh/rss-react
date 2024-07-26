@@ -1,28 +1,19 @@
 import { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/app.store';
-import { useStorage } from '../../shared/hooks/useStorage';
 import { ThemeContext } from '../../shared/providers/theme/theme.context';
 import { LastItem } from './ui/last-item';
 
 export default function MainPage() {
   const recentlyList = useSelector((state: RootState) => state.viewed.recently);
   const { theme } = useContext(ThemeContext);
-  const storage = useStorage('recently-viewed');
+
   return (
     <section
       data-testid="main-page"
       className="flex flex-col gap-8 items-center justify-center w-full h-full"
     >
-      <button
-        className="bg-red-200"
-        onClick={() => {
-          storage.setStore('new value');
-        }}
-      >
-        {`setToStorage ${storage.store}`}
-      </button>
-      <div className="">
+      <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 50 50"

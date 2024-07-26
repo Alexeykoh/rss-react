@@ -16,13 +16,14 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: 'src/setupTests',
     mockReset: true,
+    include: ['./src/**/*.{test,spec}.{ts,tsx}'],
     exclude: [
       'node_modules',
       'dist',
       '.vite',
       'vite.config.ts',
-      'postcss.config.js',
-      'tailwind.config.js',
+      '/postcss.config.js',
+      '/tailwind.config.js',
       'src/main.tsx'
     ]
   }
