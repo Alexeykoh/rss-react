@@ -1,0 +1,59 @@
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { iPerson } from '../../shared/interfaces/start-wars.interface';
+
+export interface viewedState {
+  list: iPerson[];
+  recently: iPerson[];
+}
+
+const initialState: viewedState = {
+  list: [],
+  recently: []
+};
+
+export const viewedSlice = createSlice({
+  name: 'viewed',
+  initialState,
+  reducers: {
+    addItem: (state, action: PayloadAction<iPerson>) => {
+      if (state.list.find(item => item.name === action.payload.name)) {
+        state.list = state.list.filter(
+          item => item.name !== action.payload.name
+        );
+      } else {
+        state.list.push(action.payload);
+      }
+    },
+
+    selectAll: (state, action: PayloadAction<iPerson[]>) => {
+      action.payload.forEach(item => {
+        if (!state.list.find(i => i.name === item.name)) {
+          state.list.push(item);
+        }
+      });
+    },
+
+    clearAll: state => {
+      state.list = [];
+    },
+
+    removeItem: (state, action: PayloadAction<iPerson>) => {
+      state.list = state.list.filter(item => item.name !== action.payload.name);
+    },
+    addToRecently: (state, action: PayloadAction<iPerson>) => {
+      if (state.recently.find(item => item.name === action.payload.name))
+        return;
+      if (state.recently.length === 5) {
+        state.recently.shift();
+      }
+      state.recently.push(action.payload);
+    }
+  }
+});
+
+// Action creators are generated for each case reducer function
+export const { addItem, selectAll, removeItem, addToRecently, clearAll } =
+  viewedSlice.actions;
+
+export default viewedSlice.reducer;
